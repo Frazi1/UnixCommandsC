@@ -82,7 +82,10 @@ int main(int argc, char *argv[]) {
         for (int l = 0; l < TOP; ++l) {
             sum+=numbers[l];
         }
-        printf(dates[0]);
+
+        for (int m = 0; m < TOP; ++m) {
+            printf("%s - %d - %f\%\n", dates[m], numbers[m], (double)numbers[m]*100/sum);
+        }
     }
 
     close(fd[0]);
