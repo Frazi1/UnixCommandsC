@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dmitry/fkn/os_andrey/UnixCommandsC/command.c
+unistd.h
+-
+
+/home/dmitry/fkn/os_andrey/UnixCommandsC/main.c
+sys/types.h
+-
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+wait.h
+-
+command.c
+/home/dmitry/fkn/os_andrey/UnixCommandsC/command.c
+

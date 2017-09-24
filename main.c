@@ -13,24 +13,24 @@ int main(int argc, char *argv[]) {
     char *pathToFile = "log.txt";
 
     const char *cat[] = {"cat", pathToFile, 0};
-    const char *grep1[] = {"grep", "18/Oct/2006", 0};
-    const char *cut[] = {"cut", "--delimiter=\"", "-f4", 0};
-    const char *grep2[] = {"grep", "-v", "-x", "-", 0};
-    const char *sort1[] = {"sort", 0};
-    const char *uniq[] = {"uniq", "-c", 0};
-    const char *sort2[] = {"sort", "-nrk", "1", 0};
+    const char *awk1[] = {"awk", "{print $4, $9}", 0};
+    const char *cut[] = {"cut", "-c", "2-", 0};
+    const char *grep2[] = {"grep","[[:space:]]4", 0};
+    const char *sed1[] = {"sed","s/:[0-9][0-9]:[0-9][0-9]:[0-9][0-9]//g", 0};
+    const char *sed2[] = {"sed", "s/\\//-/g", 0};
+    const char *uniq[] = {"uniq", "-c1", 0};
+    const char *sort[] = {"sort", "-nrk", "1", 0};
     const char *head[] = {"head", "-10", 0};
-    const char *tr[] = {"tr", "-s", "' '", 0};
 
     struct command cmd[] = {{cat},
-                            {grep1},
+                            {awk1},
                             {cut},
                             {grep2},
-                            {sort1},
+                            {sed1},
+                            {sed2},
                             {uniq},
-                            {sort2},
-                            {head},
-                            {tr}};
+                            {sort},
+                            {head}};
 
     int fd[2];
     pipe(fd);
@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
         int k = 0;
         printf(result);
         while (result[j] != NULL) {
-            j++;
+            while(result[++j] == ' ');
             i = 0;
             char num[10];
             while(result[j] != ' ') {
@@ -69,6 +69,7 @@ int main(int argc, char *argv[]) {
             numbers[k++] = (int) strtol(num, (char **)NULL, 10);
             while (result[j++] != '\n');
         }
+        printf("%d \n", numbers[4]);
     }
 
     close(fd[0]);
